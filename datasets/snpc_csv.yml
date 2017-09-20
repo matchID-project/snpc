@@ -1,0 +1,8 @@
+datasets:
+# table FDOSC du permis de conduire
+  snpc_csv:
+    connector: upload
+    table: FDOSC2.csv.gz
+    type: read_csv
+    sep: ";"
+    encoding: windows-1252

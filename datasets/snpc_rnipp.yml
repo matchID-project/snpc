@@ -1,0 +1,6 @@
+datasets:
+  snpc_rnipp:
+    connector: elasticsearch
+    table: snpc_rnipp
+    validation: true
+

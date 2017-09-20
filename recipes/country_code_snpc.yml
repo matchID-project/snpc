@@ -1,0 +1,18 @@
+recipes:
+  # specific country codes for SNPC
+  country_code_snpc:
+    steps:
+      - map:
+          matchid_location_depcode: matchid_location_depcode_src
+      - replace:
+          select: matchid_location_depcode$
+          regex:
+            - ^0: ''
+      - join: # country mapping (trigram COG codes specific codes)
+          type: in_memory
+          dataset: snpc_pays
+          strict: 
+            matchid_location_countrycode_src: SNPC_COUNTRY_CODE
+          select: 
+            matchid_location_country:  LIBCOG
+            matchid_location_countrycode: CODEISO3

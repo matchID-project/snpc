@@ -1,0 +1,7 @@
+datasets:
+  snpc_pays:
+    connector: upload
+    table: snpc_pays.csv
+    type: read_csv
+    sep: ","
+    encoding: utf-8

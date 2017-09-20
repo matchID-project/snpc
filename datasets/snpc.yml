@@ -1,0 +1,4 @@
+datasets:
+  snpc:
+    connector: elasticsearch
+    table: snpc

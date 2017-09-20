@@ -1,0 +1,51 @@
+recipes:
+####################################
+#  dataprepartion steps for SNPC   #
+####################################
+  dataprep_snpc:
+    input:
+      dataset: snpc_csv
+      select: #keep only useful cols
+        - Identifiant inter-table
+        - Département de naissance
+        - Pays de naissance
+        - Date de naissance
+        - Code sexe
+        - Nom usager
+        - Prénom usager
+        - Nom épouse
+        - Nom d’usage
+        - Lieu de naissance
+    output: 
+      dataset: matchid
+      append: True
+    steps:
+      - replace: #remove trailing blank spaces which is a format bug
+          select: .*
+          regex:
+            - \s*$: ''     
+      - eval: #tag the dataset
+          # matchid_id: sha1(row)
+          - matchid_src: str("SNPC")
+          - matchid_tag: "20170523"   
+      - map:
+          #mappings id, name, sex, date and location
+          matchid_id: Identifiant inter-table
+          matchid_name_last_src:
+            - Nom usager
+            - Nom épouse
+            - Nom d’usage
+          matchid_name_first_src: Prénom usager
+          matchid_sex_src: Code sexe
+          matchid_date_birth_src: Date de naissance
+          matchid_location_city_src: Lieu de naissance
+          matchid_location_depcode_src: Département de naissance
+          matchid_location_countrycode_src: Pays de naissance
+      - eval:
+        - matchid_sex: int(row['matchid_sex_src'])+1
+      - keep: 
+          select: matchid_.*
+      - french_name_normalize:
+      - ymd_date:
+      - country_code_snpc:
+      - french_city+dep: 

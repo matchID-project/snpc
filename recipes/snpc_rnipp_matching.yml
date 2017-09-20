@@ -1,0 +1,12 @@
+recipes:
+  snpc_rnipp_matching:
+    input: snpc_csv
+    output: snpc_rnipp
+    steps:
+      - dataprep_snpc:
+      - rnipp_matching:
+      - diff:
+      - keep:
+          select: .*
+          where: matchid_hit_score>0.1
+

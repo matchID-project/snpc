@@ -16,9 +16,7 @@ recipes:
         - Nom épouse
         - Nom d’usage
         - Lieu de naissance
-    output: 
-      dataset: matchid
-      append: True
+    output: snpc
     steps:
       - replace: #remove trailing blank spaces which is a format bug
           select: .*

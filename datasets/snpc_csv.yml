@@ -3,6 +3,6 @@ datasets:
   snpc_csv:
     connector: upload
     table: FDOSC2.csv.gz
-    type: read_csv
+    type: csv
     sep: ";"
     encoding: windows-1252

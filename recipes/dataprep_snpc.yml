@@ -44,6 +44,7 @@ recipes:
       - keep: 
           select: matchid_.*
       - french_name_normalize:
+      - french_name_frequency:      
       - ymd_date:
       - country_code_snpc:
       - french_city+dep: 
